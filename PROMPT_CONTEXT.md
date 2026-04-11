@@ -1,12 +1,25 @@
-### PROJECT CONTEXT: Analytic-Lead-Gen-App
+## PROJECT STATUS: Analytic-Lead-Gen-App (Phase 1 Complete)
 
-- **Stack:** Node.js, TypeScript, Prisma (ORM), PostgreSQL.
-- **Architecture:** Modular/Domain-Driven (Feature-based folders).
-- **Core Goal:** Research web apps to build customer profiles for lead gen.
-- **Current Sprint:** Setting up Project Structure & Prisma Schema.
-- **Coding Rules:**
-  1. Use OOP principles (Classes/Services).
-  2. Use async/await for all asynchronous logic.
-  3. Strict typing (no 'any' unless necessary).
-  4. Centralized error handling.
-- **Reference:** Structure based on src/modules/ directory pattern.
+### **Core Stack**
+
+- **Runtime:** Node.js (JavaScript - No TypeScript).
+- **ORM:** Prisma v6.
+- **Database:** Local PostgreSQL (@14) running on port 5432.
+- **Architecture:** Modular / DDD (Feature-based folders).
+
+### **Current Project Tree**
+
+- `src/modules/profile/`: Contains controller, service, and routes (Class-based/OOP).
+- `src/shared/`: Placeholder for global middleware and utils.
+- `prisma/schema.prisma`: Defines `CustomerProfile` with analytical fields (fsvpCompliant, leadScore, etc.).
+
+### **Key Decisions & Logic**
+
+1. **Plain JavaScript + OOP:** Using ES6 Classes for Services and Controllers to maintain clean state and dependency injection.
+2. **Prisma Client:** Initialized in the Service layer as a Singleton.
+3. **Git Workflow:** SSH authentication established; `.env` and `node_modules` ignored.
+
+### **Current Sprint Goal**
+
+Successfully implemented POST `/api/profiles` to initialize a lead in the local Postgres DB.
+Next focus: GET `/api/profiles` (listing) and data validation.
