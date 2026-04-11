@@ -2,7 +2,7 @@
 
 A modular Domain-Driven Design (DDD) engine built to transform raw lead data into qualified customer profiles. This application goes beyond basic CRUD by tracking mission-critical data points—such as Import Compliance (FSVP) and Logistics Maturity—to automate lead scoring and business intelligence.
 
-## 🛠 Data Flow Architecture
+## Data Flow Architecture
 
 ```mermaid
 graph TD
@@ -25,16 +25,18 @@ npm install
 
 ```
 
-1. Environment Setup
-   Create a .env file in the root directory and add your local PostgreSQL connection string:
-   `DATABASE_URL="postgresql://YOUR_USERNAME@localhost:5432/customer_profile_db?schema=public"`
+### 2. Environment Setup
 
-2. Database Migration
-   Initialize your local database and sync the Prisma schema:
+Create a .env file in the root directory and add your local PostgreSQL connection string:
+`DATABASE_URL="postgresql://YOUR_USERNAME@localhost:5432/customer_profile_db?schema=public"`
+
+### 3. Database Migration
+
+Initialize your local database and sync the Prisma schema:
 
 `npx prisma migrate dev --name init_local_db`
 
-4. Run the App
+### 4. Run the App
 
 `node src/server.js`
 
