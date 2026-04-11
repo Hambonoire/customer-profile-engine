@@ -1,30 +1,36 @@
-const profileService = require("../services/profileService");
+const profileService = require("./profile.service");
 
-const initializeProfile = async (req, res) => {
-  try {
-    const { email, companyName, website } = req.body;
+class ProfileController {
+  // Move your function inside the class and remove 'const'
+  async initializeProfile(req, res) {
+    try {
+      const { email, companyName, website, fsvpCompliant, leadScore } =
+        req.body;
 
-    // Basic validation (we'll upgrade this to Zod later)
-    if (!email || !companyName) {
-      return res
-        .status(400)
-        .json({ error: "Email and Company Name are required." });
+      if (!email || !companyName) {
+        return res
+          .status(400)
+          .json({ error: "Email and Company Name are required." });
+      }
+
+      const newProfile = await profileService.createInitialProfile({
+        email,
+        companyName,
+        website,
+        fsvpCompliant,
+        leadScore,
+      });
+
+      res.status(201).json({
+        message: "Profile initialized successfully",
+        data: newProfile,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
     }
-
-    const newProfile = await profileService.createInitialProfile({
-      email,
-      companyName,
-      website,
-    });
-
-    res.status(201).json({
-      message: "Profile initialized successfully",
-      data: newProfile,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
   }
-};
+}
 
-module.exports = { initializeProfile };
+// Now this line will work correctly!
+module.exports = new ProfileController();
