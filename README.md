@@ -24,3 +24,18 @@ cd customer-profile-engine
 npm install
 
 ```
+
+1. Environment Setup
+   Create a .env file in the root directory and add your local PostgreSQL connection string:
+   `DATABASE_URL="postgresql://YOUR_USERNAME@localhost:5432/customer_profile_db?schema=public"`
+
+2. Database Migration
+   Initialize your local database and sync the Prisma schema:
+
+`npx prisma migrate dev --name init_local_db`
+
+4. Run the App
+
+`node src/server.js`
+
+The server will start at http://localhost:3000.
