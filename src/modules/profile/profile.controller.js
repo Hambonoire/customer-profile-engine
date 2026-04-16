@@ -1,36 +1,33 @@
-const profileService = require("./profile.service");
+const ProfileService = require("./profile.service");
 
 class ProfileController {
-  // Move your function inside the class and remove 'const'
+  constructor() {
+    this.profileService = new ProfileService();
+  }
+
   async initializeProfile(req, res) {
     try {
-      const { email, companyName, website, fsvpCompliant, leadScore } =
-        req.body;
-
-      if (!email || !companyName) {
-        return res
-          .status(400)
-          .json({ error: "Email and Company Name are required." });
-      }
-
-      const newProfile = await profileService.createInitialProfile({
-        email,
-        companyName,
-        website,
-        fsvpCompliant,
-        leadScore,
-      });
+      const newProfile = await this.profileService.createInitialProfile(
+        req.body,
+      );
 
       res.status(201).json({
         message: "Profile initialized successfully",
         data: newProfile,
       });
     } catch (error) {
-      console.error(error);
+      // Logic for handling duplicate emails (if you have a unique constraint in Prisma)
+      if (error.code === "P2002") {
+        return res
+          .status(409)
+          .json({ error: "Profile with this email already exists" });
+      }
+
+      console.error("ProfileController Error:", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   }
 }
 
 // Now this line will work correctly!
-module.exports = new ProfileController();
+module.exports = ProfileController;

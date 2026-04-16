@@ -8,4 +8,4 @@ class ProfileService {
   }
 }
 
-module.exports = new ProfileService();
+module.exports = ProfileService;
