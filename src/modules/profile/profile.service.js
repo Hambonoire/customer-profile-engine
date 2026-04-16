@@ -1,10 +1,12 @@
-// src/modules/profile/profile.service.js
 const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
 
 class ProfileService {
+  constructor() {
+    this.prisma = new PrismaClient();
+  }
+
   async createInitialProfile(data) {
-    return await prisma.customerProfile.create({ data });
+    return await this.prisma.customerProfile.create({ data });
   }
 }
 
