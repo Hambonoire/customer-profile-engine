@@ -10,7 +10,7 @@ graph TD
     subgraph Phase_2 [Phase 2: Discovery & Intelligence]
         P2_In[User Inputs Business Type] --> P2_Disc[Discovery Service: Map Adjacent Niches]
         P2_Disc --> P2_User[User Selects Target Niches]
-        P2_User --> P2_Res[Research Service: Scrape & Fetch Metadata]
+        P2_User --> P2_Res[Researcher Service: Scrape & Fetch Metadata]
         P2_Res --> P2_An[Analytical Engine: Calculate Lead Score]
     end
 
