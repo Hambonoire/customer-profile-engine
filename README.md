@@ -2,6 +2,10 @@
 
 A modular Domain-Driven Design (DDD) engine built to transform raw lead data into qualified customer profiles. This application goes beyond basic CRUD by tracking mission-critical data points—such as Import Compliance (FSVP) and Logistics Maturity—to automate lead scoring and business intelligence.
 
+## Documentation
+
+- [System Overview](./docs/architecture/system-overview.md)
+
 ## Data Flow Architecture
 
 ```mermaid
