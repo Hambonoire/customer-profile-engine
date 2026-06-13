@@ -17,14 +17,35 @@ model CustomerProfile {
   id  Int @id @default(autoincrement())
   email String @unique
   companyName String
-  website String?
+  website String? @unique
 
-  //Mission-Aligned Data Points
+  // --- Phase 1: Mission-Aligned Data ---
   fsvpCompliant Boolean @default(false) // Import Compliance Maturity
   prefersDDP Boolean @default(true) // Logistics Preference
   avgPaymentTerms Int @default(30) // Financial/Working Capital Profile
-
   leadScore Int @default(0)
+
+  // --- Phase 2: Automated Research Data ---
+  techStack  Json?  // Stores: ["Shopify", "Klaviyo"]
+  metaTitle  String?
+  metaDescription  String?
+  source  String @default("MANUAL") // MANUAL VS RESEARCHER
+
+  // Relations
+  discoverySession  DiscoverySession? @relation(fields: [discoverySessionId], references: [id])
+  discoverySessionId  Int?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model DiscoverySession {
+  id  Int @id @default(autoincrement())
+  userId  String  // Link to your Auth system later
+  status  String @default("PENDING_RESEARCH")
+  niches  String[]  // e.g. ["Coffee Roaster", "Tea Importer"]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Link to all profiles discovered in this session profiles Profile[]
 }
